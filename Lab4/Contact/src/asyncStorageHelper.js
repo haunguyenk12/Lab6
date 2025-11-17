@@ -2,7 +2,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const CONTACTS_KEY = '@contacts';
 
-// Lưu contacts vào AsyncStorage
 export const saveContacts = async (contacts) => {
     try {
         const jsonValue = JSON.stringify(contacts);
@@ -14,7 +13,6 @@ export const saveContacts = async (contacts) => {
     }
 };
 
-// Lấy contacts từ AsyncStorage
 export const getContacts = async () => {
     try {
         const jsonValue = await AsyncStorage.getItem(CONTACTS_KEY);
@@ -25,7 +23,6 @@ export const getContacts = async () => {
     }
 };
 
-// Xóa tất cả contacts
 export const clearContacts = async () => {
     try {
         await AsyncStorage.removeItem(CONTACTS_KEY);
@@ -36,7 +33,6 @@ export const clearContacts = async () => {
     }
 };
 
-// Cập nhật một contact
 export const updateContact = async (updatedContact) => {
     try {
         const contacts = await getContacts();

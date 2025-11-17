@@ -18,7 +18,6 @@ const CustomDrawer = ({ children, navigation, currentRoute }) => {
         }).start();
     }, [isDrawerOpen]);
 
-    // PanResponder for closing drawer by swiping left
     const closePanResponder = React.useRef(
         PanResponder.create({
             onStartShouldSetPanResponder: () => isDrawerOpen,
