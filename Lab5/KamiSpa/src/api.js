@@ -55,3 +55,30 @@ export const deleteService = async (id) => {
     const res = await api.delete(`/services/${id}`);
     return res.data;
 };
+export const getAllCustomers = async () => {
+
+
+
+    const res = await api.get("/customers");
+    return res.data;
+};
+
+export const addCustomer = async (name, phone, token) => {
+
+    const config = {
+        headers: { Authorization: `Bearer ${token}` }
+    };
+
+    const res = await api.post("/customers", { name, phone }, config);
+    return res.data;
+};
+
+export const getAllTransactions = async () => {
+    const res = await api.get("/transactions");
+    return res.data;
+};
+
+export const getTransactionById = async (id) => {
+    const res = await api.get(`/transactions/${id}`);
+    return res.data;
+};

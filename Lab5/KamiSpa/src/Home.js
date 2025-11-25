@@ -2,14 +2,30 @@ import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, ActivityIndicator, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getAllServices } from "./api";
 import { useFocusEffect } from "@react-navigation/native";
-
 
 export default function Home({ navigation, route }) {
     const [services, setServices] = useState([]);
     const [loading, setLoading] = useState(true);
-    const userName = route.params?.user;
+    const [userName, setUserName] = useState("");
+
+    // Load user name khi component mount
+    useEffect(() => {
+        loadUserName();
+    }, []);
+
+    const loadUserName = async () => {
+        try {
+            const name = await AsyncStorage.getItem("@kami_user_name");
+            if (name) {
+                setUserName(name);
+            }
+        } catch (error) {
+            console.log("Lỗi đọc user name:", error);
+        }
+    };
 
     // Sử dụng useFocusEffect để reload dữ liệu mỗi khi màn hình được focus
     useFocusEffect(
@@ -72,7 +88,6 @@ export default function Home({ navigation, route }) {
                     contentContainerStyle={styles.listContent}
                 />
             )}
-
 
         </SafeAreaView>
     );

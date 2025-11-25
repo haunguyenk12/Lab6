@@ -35,11 +35,12 @@ export default function Login({ navigation }) {
                 throw new Error("Server không trả token");
             }
 
-            // Lưu token vào AsyncStorage
+            // Lưu token và user name vào AsyncStorage
             await AsyncStorage.setItem("@kami_token", data.token);
+            await AsyncStorage.setItem("@kami_user_name", data.name);
 
-            // Chuyển sang màn hình Home
-            navigation.navigate("Home", { user: data.name });
+            // Chuyển sang màn hình Main (BottomTabs)
+            navigation.replace("Main");
         } catch (err) {
             // Lấy thông báo lỗi từ server nếu có
             const msg = err.response?.data?.message || err.response?.data?.errors?.[0]?.msg || err.message;
@@ -108,7 +109,7 @@ const styles = StyleSheet.create({
     },
     button: {
         marginTop: 16,
-        backgroundColor: "#e62ba1ff",
+        backgroundColor: "#d63250ff",
         paddingVertical: 12,
         borderRadius: 8,
         alignItems: "center",

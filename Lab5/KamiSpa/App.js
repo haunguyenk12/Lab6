@@ -8,10 +8,12 @@ import { MenuProvider } from 'react-native-popup-menu';
 // Screens
 import Login from "./src/Login";
 import Home from "./src/Home";
+import BottomTabs from "./src/BottomTabs";
 import ServiceDetail from "./src/ServiceDetail";
 import AddService from "./src/AddService";
 import EditService from "./src/EditService";
-
+import AddCustomer from "./src/AddCustomer"
+import TransactionDetail from "./src/TransactionDetail";
 
 const Stack = createStackNavigator();
 
@@ -24,7 +26,7 @@ export default function App() {
             try {
                 const token = await AsyncStorage.getItem("@kami_token");
                 if (token) {
-                    setInitialRoute("Home"); // đã login → vào danh sách services
+                    setInitialRoute("Main"); // đã login → vào danh sách services
                 } else {
                     setInitialRoute("Login"); // chưa login → vào Login
                 }
@@ -55,6 +57,11 @@ export default function App() {
                         options={{ headerShown: false }}
                     />
                     <Stack.Screen
+                        name="Main"
+                        component={BottomTabs}
+                        options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
                         name="Home"
                         component={Home}
                         options={{ headerShown: false }}
@@ -72,6 +79,16 @@ export default function App() {
                     <Stack.Screen
                         name="EditService"
                         component={EditService}
+                        options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                        name="AddCustomer"
+                        component={AddCustomer}
+                        options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                        name="TransactionDetail"
+                        component={TransactionDetail}
                         options={{ headerShown: false }}
                     />
                 </Stack.Navigator>
